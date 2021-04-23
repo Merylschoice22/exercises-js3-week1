@@ -3,17 +3,17 @@ function removeVowels(word) {
 
   var result = [];
 
-  characters.forEach(function(character) {
+  characters.forEach(function (character) {
     if (
-      character === "a" ||
-      character === "o" ||
-      character === "i" ||
-      character === "e" ||
-      character === "u"
+      character.toLowerCase() === "a" ||
+      character.toLowerCase() === "o" ||
+      character.toLowerCase() === "i" ||
+      character.toLowerCase() === "e" ||
+      character.toLowerCase() === "u"
     ) {
-      result.push(character);
-    } else {
       result.push("_");
+    } else {
+      result.push(character);
     }
   });
 
@@ -21,7 +21,7 @@ function removeVowels(word) {
 }
 
 function removeVowelsForWords(words) {
-  var result = words.map(function(word) {
+  var result = words.map(function (word) {
     return removeVowels(word);
   });
 
@@ -32,9 +32,9 @@ function removeVowelsForWords(words) {
   Task 1
   Let's trace this piece of code - what is the value of result with this input
   */
-  var result = removeVowels('samuel');
+var result = removeVowels("samuel");
 
-console.log(result) // _a_ue_
+console.log(result);
 
 /*
 	Task 2
@@ -42,8 +42,5 @@ console.log(result) // _a_ue_
     expected output?:
 */
 
-var names = removeVowelsForWords(["Irina", "Etza", "Daniel"])
-console.log(names)
-//__i_a, ___a, _a_ie_
-
-
+var names = removeVowelsForWords(["Irina", "Etza", "Daniel"]);
+console.log(names);
