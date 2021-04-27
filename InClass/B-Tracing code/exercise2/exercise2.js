@@ -3,25 +3,33 @@ function removeVowels(word) {
 
   var result = [];
 
-  characters.forEach(function (character) {
-    if (
-      character.toLowerCase() === "a" ||
-      character.toLowerCase() === "o" ||
-      character.toLowerCase() === "i" ||
-      character.toLowerCase() === "e" ||
-      character.toLowerCase() === "u"
-    ) {
+  const vowels = "aeiou";
+
+  characters.forEach((character) => {
+    if (vowels.includes(character.toLowerCase())) {
       result.push("_");
     } else {
       result.push(character);
     }
+
+    // if (
+    //   character.toLowerCase() === "a" ||
+    //   character.toLowerCase() === "o" ||
+    //   character.toLowerCase() === "i" ||
+    //   character.toLowerCase() === "e" ||
+    //   character.toLowerCase() === "u"
+    // ) {
+    //   result.push("_");
+    // } else {
+    //   result.push(character);
+    // }
   });
 
   return result.join("");
 }
 
 function removeVowelsForWords(words) {
-  var result = words.map(function (word) {
+  var result = words.map((word) => {
     return removeVowels(word);
   });
 

@@ -1,21 +1,19 @@
-
-
 /*Task. go through all of these issues and make appropriate improvements to the code.
 
 1. Naming: the function has a bad name, myFunction() tells you nothing about
    what the function does. It's also considered bad practice to name variables
    vaguely by separating them through numbers (incomeTax1, incomeTax2, etc). If
    you find yourself doing this then you should either use an array (such as
-   incomeTax[]).
+   incomeTax[]). <==== 
 
 2. Commenting: the function isn't documented at all. It's very difficult to
    understand what the function's purpose is and how each part of the code
    contributes to it. By writing comments, the coder communicates their
    reasoning and helps the function be human readable.
 
-3. Layout/formatting: unnecessary spacing between the if and else statement.
+3. Layout/formatting: unnecessary spacing between the if and else statement. <====
 
-4. Single responsibility: the function doesn't have a single purpose. It
+4./ Single responsibility: the function doesn't have a single purpose. It
    calculates national insurance and salary deductions. Maybe the national
    insurance calculation could be moved to a separate function.
 
@@ -32,20 +30,49 @@
 7. Magic numbers. The code contains a lot of magic numbers, including `17775`,
    `0.09` and `0.1`.
 
-8. Useless parameters: the code contains a variable which isn't used. They
+8./ Useless parameters: the code contains a variable which isn't used. They
    should be removed because they are confusing. It is tempting when you're
    starting to code a function to add more parameters thinking that you might
    need them, but it's important to remove them if you don't end up using them.
    
    */
 
+// /***** ORIGINAL CODE *****/
+// function myFunction(salary, taxCode, incomeTax1, incomeTax2, ownsCar) {
+//   var totalIncomeTax = incomeTax1 + incomeTax2;
+//   var studentLoan = (salary - 17775) * 0.09;
+//   var originalSalary = salary;
+//   var nationalInsurance = null;
 
-function myFunction(salary, taxCode, incomeTax1, incomeTax2, ownsCar) {
-  var totalIncomeTax = incomeTax1 + incomeTax2;
-  var studentLoan = (salary - 17775) * 0.09;
-  var originalSalary = salary;
-  var nationalInsurance = null;
+//   if (taxCode === "1150L") {
+//     nationalInsurance = salary * 0.1;
+//   } else if (taxCode === "ST") {
+//     nationalInsurance = salary * 0.05;
+//   } else {
+//     nationalInsurance = salary * 0.08;
+//   }
 
+//   var deductions = [nationalInsurance, totalIncomeTax, studentLoan];
+
+//   salary = salary - deductions[0];
+//   salary = salary - deductions[1];
+//   salary = salary - deductions[2];
+
+//   return (
+//     "Your gross income is ï¿½" +
+//     originalSalary.toString() +
+//     " and your net income is ï¿½" +
+//     salary.toString() +
+//     "."
+//   );
+// }
+
+// console.log(calculateIncome(28000, "1150L", 1000, 580, false));
+
+/***** NEW CODE *****/
+
+function calculateNationalInsurance(taxCode, salary) {
+  let nationalInsurance = 0;
   if (taxCode === "1150L") {
     nationalInsurance = salary * 0.1;
   } else if (taxCode === "ST") {
@@ -53,20 +80,37 @@ function myFunction(salary, taxCode, incomeTax1, incomeTax2, ownsCar) {
   } else {
     nationalInsurance = salary * 0.08;
   }
+  return nationalInsurance;
+}
 
+function calculateIncome(salary, taxCode, incomeTaxes) {
+  console.log(incomeTaxes);
+  var totalIncomeTax = 0;
+  incomeTaxes.forEach((incomeTax) => {
+    totalIncomeTax += incomeTax;
+  });
+  console.log(totalIncomeTax);
+
+  var studentLoan = (salary - 17775) * 0.09;
+  var originalSalary = salary;
+  calculateNationalInsurance(taxCode, salary);
   var deductions = [nationalInsurance, totalIncomeTax, studentLoan];
+  deductions.forEach((deduction) => (salary -= deduction));
 
-  salary = salary - deductions[0];
-  salary = salary - deductions[1];
-  salary = salary - deductions[2];
+  //   for (i=0; i > deductions.length - 1; i++) {
+  //      const deduction = deductions[i];
+  //      salary = salary - deduction;
+  //   }
 
   return (
-    "Your gross income is £" +
+    "Your gross income is ï¿½" +
     originalSalary.toString() +
-    " and your net income is £" +
+    " and your net income is ï¿½" +
     salary.toString() +
     "."
   );
 }
 
-console.log(myFunction(28000, "1150L", 1000, 580, false));
+const incomeTaxes = [1000, 580];
+calculateNationalInsurance("1150L", 28000);
+console.log(calculateIncome(28000, "1150L", incomeTaxes));

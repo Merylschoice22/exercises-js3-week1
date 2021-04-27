@@ -10,16 +10,13 @@ function greetPeople(people) {
   for (const key in people) {
     const person = people[key];
     if (key == people.length - 1) {
-      greeting = `${greeting} ${person}.`;
-      console.log(greeting);
+      greeting = `${greeting}& ${person}.`;
       // } else if (key == people.length - 2) {
       //   greeting = `${greeting} ${person} &`;
     } else {
-      greeting = `${greeting} ${person}, `;
-      console.log(greeting);
+      greeting = `${greeting}${person}, `;
     }
   }
-  console.log(greeting);
   return greeting;
 }
 
@@ -30,6 +27,5 @@ function greetPeople(people) {
 
 var mentors = ["Irina", "Ashleigh", "Etza"];
 var result = greetPeople(mentors);
-// Hello Irina
-// Hello IrinaAshleigh
-// Hello IrinaAshleighEtza
+
+console.log(result);
